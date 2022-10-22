@@ -7,7 +7,6 @@ This package "GPN" includes the following parts:
 - **GPN construction**: Construction of the Genotype and Phenotype Network with the individual-level phenotype and genotype data;
 - **Community detection method**: Novel community detection method to partition K phenotypes into disjoint network modules based on the similarity matrix from GPN;
 - **Modified computational efficient clustering linear combination method**: Association test between phenotypes in each module and a SNP of interest;
-- **Comparison methods**: CLC, HCLC, MultiPhen, O'Brien, and Omnibus.
 
 
 ## Installation
