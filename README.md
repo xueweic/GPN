@@ -22,6 +22,7 @@ You can install the released version of APGD from Github with:
 
 ``` r
 devtools::install_github("xueweic/GPN")
+library(GPN)
 ```
 
 ## Reference
