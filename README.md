@@ -6,7 +6,14 @@ This package "GPN" includes the following parts:
 
 - **GPN construction**: Construction of the Genotype and Phenotype Network with the individual-level phenotype and genotype data;
 - **Community detection method**: Novel community detection method to partition K phenotypes into disjoint network modules based on the similarity matrix from GPN;
-- **Modified computational efficient clustering linear combination method**: Association test between phenotypes in each module and a SNP of interest;
+- **Multiple Phenotype Association Tests with and without considering the network modules: test the association between K phenotypes with a SNP. The phenotypes can be either qualitative or binary, espectially the binary phenotypes with the extremely case-control ratio (the test statistics has been adjusted by the saddlepoint approximation)
+-- ceCLC: Modified computational efficient clustering linear combination method
+-- CLC: Modified clustering linear combination method
+-- HCLC: Modified clustering linear combination method based on hierarchical clustering
+-- MultiPhen: joint model of multiple phenotypes can increase discovery in GWAS
+-- O'Brien: Modified O'Brien (SSU) method
+-- Omnibus: Modified omnibus (Chi-square) method
+-- TATES: Modified TATES method
 
 
 ## Installation
