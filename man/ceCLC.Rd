@@ -21,6 +21,10 @@ p-value of the ceCLC test statistic
 \description{
 ceCLC test for testing the association between K phenotypes with a SNP. The phenotypes can be either qualitative or binary, espectially the binary phenotypes with the extremely case-control ratio (the test statistics has been adjusted by the saddlepoint approximation)
 }
+\details{
+Reference:
+Wang, M., Zhang, S., & Sha, Q. (2022). A computationally efficient clustering linear combination approach to jointly analyze multiple phenotypes for GWAS. PloS one, 17(4), e0260911.
+}
 \examples{
 N <- 10000
 y1 <- replicate(2, sample(c(0,1), N, replace = TRUE, prob = c(0.999, 0.001)))
@@ -28,6 +32,6 @@ y2 <- replicate(2, sample(c(0,1), N, replace = TRUE, prob = c(0.5, 0.5)))
 y3 <- replicate(2, rnorm(N))
 y <- cbind(y1, y2, y3)
 x <- rbinom(N,2,0.3)
-ceCLC(x, y, cov = NULL)
+ceCLC(x, y)
 
 }
