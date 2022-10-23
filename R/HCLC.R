@@ -1,17 +1,19 @@
 
-#' Modified Computational Efficient Clustering linear combination (ceCLC) test
+
+#' Modified clustering linear combination method based on hierarchical clustering (HCLC)
 #'
-#' ceCLC test for testing the association between K phenotypes with a SNP. The phenotypes can be either qualitative or binary, espectially the binary phenotypes with the extremely case-control ratio (the test statistics has been adjusted by the saddlepoint approximation)
+#' HCLC test for testing the association between K phenotypes with a SNP. The phenotypes can be either qualitative or binary, espectially the binary phenotypes with the extremely case-control ratio (the test statistics has been adjusted by the saddlepoint approximation)
 #'
 #' Reference:
-#' Wang, M., Zhang, S., & Sha, Q. (2022). A computationally efficient clustering linear combination approach to jointly analyze multiple phenotypes for GWAS. PloS one, 17(4), e0260911.
+#' Li, X., Zhang, S., & Sha, Q. (2020). Joint analysis of multiple phenotypes using a clustering linear combination method based on hierarchical clustering. Genetic epidemiology, 44(1), 67-78.
+#' Liang, X., Cao, X., Sha, Q., & Zhang, S. (2022). HCLC-FC: a novel statistical method for phenome-wide association studies. bioRxiv.
 #'
 #' @param x The genotyes for only one SNP with dimension n by 1.
 #' @param y The phentypes with dimension n individuals by K phenotypes.
 #' @param cov The covariate matrix with dimension n individuals by C covariates. defalut: there is no covariates.
-#' @param cluster.method The agglomeration method to be used in the hierarchical clustering method. This should be one of "ward.D","ward.D2","single","complete","average","mcquitty","median","centroid". default: "ward.D2"
+#' @param cluster.method The agglomeration method to be used in the hierarchical clustering method. This should be one of "ward.D","ward.D2","single","complete","average","mcquitty","median","centroid". default: "average"
 #'
-#' @return p-value of the ceCLC test statistic
+#' @return p-value of the HCLC test statistic
 #' @export
 #'
 #' @examples
@@ -21,10 +23,9 @@
 #' y3 <- replicate(2, rnorm(N))
 #' y <- cbind(y1, y2, y3)
 #' x <- rbinom(N,2,0.3)
-#' ceCLC(x, y)
+#' HCLC(x, y)
 #'
-ceCLC <- function(x, y, cov = NULL, cluster.method = "ward.D2")
-{
+HCLC <- function(x, y, cov = NULL, cluster.method = "average"){
   x <- as.matrix(x)
   y <- as.matrix(y)
   # Check dimension of the individual-level data: x and y
@@ -73,31 +74,29 @@ ceCLC <- function(x, y, cov = NULL, cluster.method = "ward.D2")
     y <- as.matrix(y1)
   }
 
-
-  L0 <- ncol(y)
-  if (L0 == 1){
-    CLC <- Tstat^2
-    pv0 <- pchisq(CLC,L0,lower.tail = FALSE)
-  } else {
+  # Test
+  K <- ncol(y)
+  if (K == 1){
+    pv <- pchisq(Tstat^2, 1, lower.tail = FALSE)
+  } else if ( K == 2){
     Sigma <- cor(y)
-    dist <- 1-Sigma
-    hc <- hclust(as.dist(dist), method = cluster.method)
-    pv0 <- rep(9999,L0)
-    U <- list()
-    for (L in c(1:L0))
-    {
-      index1 <- cutree(hc,L)
-      B <- sapply(1:L, function(t) as.numeric(index1==t))
-      W <- t(B)%*%ginv_ratio(Sigma)
-      U[[L]] <- t(W)%*%ginv_ratio(W%*%Sigma%*%t(W))%*%W
-      CLC <- t(Tstat)%*%U[[L]]%*%Tstat
-      pv0[L] <- pchisq(CLC,L,lower.tail = FALSE)
-    }
+    W <- ginv_ratio(Sigma)
+    U <- t(W)%*%ginv_ratio(W%*%Sigma%*%t(W))%*%W
+    CLC <- t(Tstat)%*%U%*%Tstat
+    pv <- pchisq(CLC,2,lower.tail = FALSE)
+  } else {
+    # Hierarchical clustering based on the number of clusters with max height difference
+    Sigma <- as.matrix(cor(y))
+    dist <- 1 - Sigma
+    hc <- hclust(as.dist(dist),cluster.method)
+    H <- which.max(diff(hc$height))+1
+    index <- cutree(hc,H)
+    L <- max(index)
+    B <- sapply(1:L, function(t) as.numeric(index==t))
+    # CLC test
+    W <- ginv_ratio( t(B)%*%ginv_ratio(Sigma)%*%B ) %*% t(B) %*% ginv_ratio(Sigma)
+    CLC <- t( W%*%Tstat ) %*% ginv_ratio( W%*%Sigma%*%t(W) ) %*% ( W%*%Tstat )
+    pv <- pchisq(CLC,L,lower.tail = FALSE)
   }
-  is.small <- (pv0<1e-15)
-  pv0[!is.small] <- tan((0.5-pv0[!is.small])*pi)
-  pv0[is.small] <- 1/pv0[is.small]/pi
-  ACAT <- mean(pv0)
-  pvalue <- 0.5-atan(ACAT)/pi
-  return(pvalue)
+  return(pv)
 }

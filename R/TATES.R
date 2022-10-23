@@ -1,17 +1,17 @@
 
-#' Modified Computational Efficient Clustering linear combination (ceCLC) test
+
+#' Modified TATES test
 #'
-#' ceCLC test for testing the association between K phenotypes with a SNP. The phenotypes can be either qualitative or binary, espectially the binary phenotypes with the extremely case-control ratio (the test statistics has been adjusted by the saddlepoint approximation)
+#' TATES test for testing the association between K phenotypes with a SNP. The phenotypes can be either qualitative or binary, espectially the binary phenotypes with the extremely case-control ratio (the test statistics has been adjusted by the saddlepoint approximation)
 #'
 #' Reference:
-#' Wang, M., Zhang, S., & Sha, Q. (2022). A computationally efficient clustering linear combination approach to jointly analyze multiple phenotypes for GWAS. PloS one, 17(4), e0260911.
+#' Van der Sluis, S., Posthuma, D., & Dolan, C. V. (2013). TATES: efficient multivariate genotype-phenotype analysis for genome-wide association studies. PLoS genetics, 9(1), e1003235.
 #'
 #' @param x The genotyes for only one SNP with dimension n by 1.
 #' @param y The phentypes with dimension n individuals by K phenotypes.
 #' @param cov The covariate matrix with dimension n individuals by C covariates. defalut: there is no covariates.
-#' @param cluster.method The agglomeration method to be used in the hierarchical clustering method. This should be one of "ward.D","ward.D2","single","complete","average","mcquitty","median","centroid". default: "ward.D2"
 #'
-#' @return p-value of the ceCLC test statistic
+#' @return p-value of the TATES test statistic
 #' @export
 #'
 #' @examples
@@ -21,9 +21,10 @@
 #' y3 <- replicate(2, rnorm(N))
 #' y <- cbind(y1, y2, y3)
 #' x <- rbinom(N,2,0.3)
-#' ceCLC(x, y)
+#' TATES(x, y)
 #'
-ceCLC <- function(x, y, cov = NULL, cluster.method = "ward.D2")
+#'
+TATES <- function(x, y, cov=NULL)
 {
   x <- as.matrix(x)
   y <- as.matrix(y)
@@ -37,11 +38,6 @@ ceCLC <- function(x, y, cov = NULL, cluster.method = "ward.D2")
     if (nrow(cov) != nrow(x)){
       stop("Error: Please check the sample size of covariance matrix, which should be the same as the sample size of  individual-level genotyps and phenotypes!")
     }
-  }
-  # Check agglomeration method in the hierarchical clustering method
-  cMethod <- c("ward.D","ward.D2","single","complete","average","mcquitty","median","centroid")
-  if (!cluster.method %in% cMethod){
-    stop(paste("Error: the cluster.method must be one of", paste(cMethod, collapse = ", "), "!"))
   }
 
   # score test statistic
@@ -74,30 +70,28 @@ ceCLC <- function(x, y, cov = NULL, cluster.method = "ward.D2")
   }
 
 
-  L0 <- ncol(y)
-  if (L0 == 1){
-    CLC <- Tstat^2
-    pv0 <- pchisq(CLC,L0,lower.tail = FALSE)
-  } else {
-    Sigma <- cor(y)
-    dist <- 1-Sigma
-    hc <- hclust(as.dist(dist), method = cluster.method)
-    pv0 <- rep(9999,L0)
-    U <- list()
-    for (L in c(1:L0))
-    {
-      index1 <- cutree(hc,L)
-      B <- sapply(1:L, function(t) as.numeric(index1==t))
-      W <- t(B)%*%ginv_ratio(Sigma)
-      U[[L]] <- t(W)%*%ginv_ratio(W%*%Sigma%*%t(W))%*%W
-      CLC <- t(Tstat)%*%U[[L]]%*%Tstat
-      pv0[L] <- pchisq(CLC,L,lower.tail = FALSE)
-    }
+  K <- ncol(y)
+  n <- nrow(y)
+  if (K == 1)
+  {
+    pv <- pchisq(Tstat^2, 1, lower.tail = FALSE)
   }
-  is.small <- (pv0<1e-15)
-  pv0[!is.small] <- tan((0.5-pv0[!is.small])*pi)
-  pv0[is.small] <- 1/pv0[is.small]/pi
-  ACAT <- mean(pv0)
-  pvalue <- 0.5-atan(ACAT)/pi
-  return(pvalue)
+  if (K > 1)
+  {
+    pv0 <- pchisq(Tstat^2, 1, lower.tail = FALSE)
+    pv_j <- sort(pv0, index.return = TRUE)
+    idx <- pv_j$ix
+    y <- y[,idx]
+    r <- cor(y)
+    rho <- -0.0008-0.0023*r+0.6226*r^2+0.0149*r^3+0.1095*r^4-0.0219*r^5+0.2179*r^6
+    me <- numeric(K)
+    for(i in 1:K){
+      rhoi <- rho[1:i,1:i]
+      eigeni <- eigen(rhoi)$values
+      me[i] <- i-sum(ifelse(eigeni>1,eigeni,1)-1)
+    }
+    pv <- min(me[K]*pv_j$x/me)
+  }
+  return(pv)
 }
+
