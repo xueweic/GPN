@@ -31,3 +31,15 @@ Xuewei Cao, Shuanglin Zhang, Qiuying Sha*. A novel method for multiple phenotype
 **Any questions**? xueweic_AT_mtu_DOT_edu
 
 
+## Graphical Overview
+
+<p align="center">
+  <img src="Figure/Figure1 copy.png" width="350">
+</p>
+
+
+
+
+
+
+
