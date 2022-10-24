@@ -37,11 +37,8 @@ Xuewei Cao, Shuanglin Zhang, Qiuying Sha*. A novel method for multiple phenotype
   <img src="Figure/Figure1 copy.png" width="1000">
 </p>
 
-ol > li::marker {
-  font-weight: bold;
-}
 <ol type="a">
-  <li>Construction of the signed bipartite network called GPN based on genotypes and phenotypes. Phenotypes (yellow squares) and SNPs form a directed edge which represents the strength of the association, where the red dashed line indicates that the minor allele of SNP is a protective allele to the phenotype, otherwise, the blue dashed line indicates that the minor allele of SNP is a risk allele to the phenotype.</li>
+  <li style="font-weight:bold"><span style="font-weight:normal">Construction of the signed bipartite network called GPN based on genotypes and phenotypes. Phenotypes (yellow squares) and SNPs form a directed edge which represents the strength of the association, where the red dashed line indicates that the minor allele of SNP is a protective allele to the phenotype, otherwise, the blue dashed line indicates that the minor allele of SNP is a risk allele to the phenotype.</li>
   <li>Tea</li>
   <li>Milk</li>
 </ol>
