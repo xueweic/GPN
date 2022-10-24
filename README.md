@@ -43,6 +43,12 @@ Xuewei Cao, Shuanglin Zhang, Qiuying Sha*. A novel method for multiple phenotype
   <li>Milk</li>
 </ol>
 
+<ol>
+	<li><span>item</span></li>
+	<li><span>item</span></li>
+	<li><span>item</span></li>
+	<li><span>item</span></li>
+</ol>
 ol {
 	list-style-type: upper-roman;
 	font-weight: bold;
