@@ -37,19 +37,13 @@ Xuewei Cao, Shuanglin Zhang, Qiuying Sha*. A novel method for multiple phenotype
   <img src="Figure/Figure1 copy.png" width="1000">
 </p>
 
-**a**. Construction of the signed bipartite network called GPN based on genotypes and phenotypes. Phenotypes (yellow squares) and SNPs form a directed edge which represents the strength of the association, where the red dashed line indicates that the minor allele of SNP is a protective allele to the phenotype, otherwise, the blue dashed line indicates that the minor allele of SNP is a risk allele to the phenotype.
-
-**b**. Construction of the signed network called PPN, which is the one-mode projection of the GPN on phenotypes.
-
-**c**. The novel community detection method to partition phenotypes into different disjoint network modules with different colors. 
-
-**d**. Multiple phenotype association tests are applied to test the association between phenotypes in each of network modules and a SNP, then the Bonferroni Correction is used to obtain the overall p-value. 
-
-**e**. GWAS signals are identified by multiple phenotype association test with or without considering network modules. 
-
-**f**. Functional enrichment analysis based on the detected GWAS signals and the publicly available functional database. 
-
-**g**. Colocalization of GWAS signals and eQTL analysis.
+**a**). Construction of the signed bipartite network called GPN based on genotypes and phenotypes. Phenotypes (yellow squares) and SNPs form a directed edge which represents the strength of the association, where the red dashed line indicates that the minor allele of SNP is a protective allele to the phenotype, otherwise, the blue dashed line indicates that the minor allele of SNP is a risk allele to the phenotype.
+**b**). Construction of the signed network called PPN, which is the one-mode projection of the GPN on phenotypes.
+**c**). The novel community detection method to partition phenotypes into different disjoint network modules with different colors. 
+**d**). Multiple phenotype association tests are applied to test the association between phenotypes in each of network modules and a SNP, then the Bonferroni Correction is used to obtain the overall p-value. 
+**e**). GWAS signals are identified by multiple phenotype association test with or without considering network modules. 
+**f**). Functional enrichment analysis based on the detected GWAS signals and the publicly available functional database. 
+**g**). Colocalization of GWAS signals and eQTL analysis.
 
 
 
