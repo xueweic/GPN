@@ -33,7 +33,7 @@ Xuewei Cao, Shuanglin Zhang, Qiuying Sha*. A novel method for multiple phenotype
 Xuewei Cao #, Lirong Zhu #, Xiaoyu Liang, Shuanglin Zhang, Qiuying Sha*. Constructing genotype and phenotype network helps reveal disease heritability and phenome-wide association studies
 
 
-**Any questions**? xueweic_AT_mtu_DOT_edu
+**Any questions**? xueweic@mtu.edu; lirongz@mtu.edu
 
 
 ## Graphical Overview
