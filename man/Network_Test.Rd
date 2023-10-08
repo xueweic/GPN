@@ -2,13 +2,14 @@
 % Please edit documentation in R/Network_Test.R
 \name{Network_Test}
 \alias{Network_Test}
-\title{Modified Computational Efficient Clustering linear combination (ceCLC) test with the network modules derived from genotype and phenotype network (GPN)}
+\title{Multiple phenotype association test based on the network modules
+derived from genotype and phenotype network (GPN)}
 \usage{
 Network_Test(
   x,
   y,
   B,
-  test.method = "ceCLC",
+  test.method = "acat.test",
   cov = NULL,
   cluster.method = "ward.D2"
 )
@@ -18,19 +19,31 @@ Network_Test(
 
 \item{y}{The phentypes with dimension n individuals by K phenotypes.}
 
-\item{B}{The clustering results of K phenotypes with dimension K by C.cate categories.}
+\item{B}{The clustering results of K phenotypes with dimension K by C.cate
+categories.}
 
-\item{test.method}{The multiple phenotype association test. This should be one of "ceCLC","CLC","HCLC","OBrien","omnibus","TATES","MultiPhen". default: "ceCLC"}
+\item{test.method}{The multiple phenotype association test. This should be
+one of "ceCLC","CLC","HCLC","OBrien","omnibus","TATES","acat.test","HMPhmp.test",
+"MultiPhen". default: "acat.test"}
 
-\item{cov}{The covariate matrix with dimension n individuals by C covariates. defalut: there is no covariates.}
+\item{cov}{The covariate matrix with dimension n individuals by C covariates.
+defalut: there is no covariates.}
 
-\item{cluster.method}{The agglomeration method to be used in the hierarchical clustering method. This should be one of "ward.D","ward.D2","single","complete","average","mcquitty","median","centroid". default: "ward.D2"}
+\item{cluster.method}{The agglomeration method to be used in the hierarchical
+clustering method. This should be one of "ward.D","ward.D2","single",
+"complete","average","mcquitty","median","centroid". default: "ward.D2"}
 }
 \value{
-A list of pv.Modules and pv.NET. pv.Modules is a C.cate-dimension vector of p-values, where pvalues are the association results for testing the SNP and phenotypes in each of network modules. pv.NET is the pvalue of modified ceCLC with network modules.
+A list of pv.Modules and pv.NET. pv.Modules is a C.cate-dimension
+  vector of p-values, where pvalues are the association results for testing
+  the SNP and phenotypes in each of network modules. pv.NET is the pvalue
+  of modified ceCLC with network modules.
 }
 \description{
-Modified ceCLC with network modules for testing the association between K phenotypes with a SNP. The phenotypes can be either qualitative or binary, espectially the binary phenotypes with the extremely case-control ratio (the test statistics has been adjusted by the saddlepoint approximation)
+Multiple phenotype association test for testing the association between
+K phenotypes with a SNP. The phenotypes can be either qualitative or binary,
+espectially the binary phenotypes with the extremely case-control ratio
+(the test statistics has been adjusted by the saddlepoint approximation)
 }
 \examples{
 N <- 10000
@@ -40,7 +53,7 @@ y3 <- replicate(2, rnorm(N))
 y <- cbind(y1, y2, y3)
 x <- rbinom(N,2,0.3)
 B <- matrix(c(1,1,0,0,0,0,0,0,1,1,0,0,0,0,0,0,1,1), nrow = 6)
-Network_Test(x, y, B, test.method = "ceCLC")
+out <- Network_Test(x, y, B, test.method = "acat.test")
 
 
 }

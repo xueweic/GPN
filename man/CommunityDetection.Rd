@@ -5,7 +5,7 @@
 \title{Community Detection function}
 \usage{
 CommunityDetection(
-  BiNet,
+  Net,
   npert = 100,
   mMax = "None",
   cluster.method = "ward.D2",
@@ -13,28 +13,38 @@ CommunityDetection(
 )
 }
 \arguments{
-\item{BiNet}{M by K matrix of the signed bipartite genotype and phenotype network, row denotes the M SNPs and column denotes K phenotypes.}
+\item{Net}{M by K matrix of the signed bipartite genotype and
+phenotype network, row denotes the M SNPs and column denotes K phenotypes.}
 
 \item{npert}{The number of perturbation times. default: 100}
 
 \item{mMax}{The maximum searching number of clusters (mMax < K). default: K}
 
-\item{cluster.method}{The agglomeration method to be used in the hierarchical clustering method. This should be one of "ward.D","ward.D2","single","complete","average","mcquitty","median","centroid". default: "ward.D2"}
+\item{cluster.method}{The agglomeration method to be used in the
+hierarchical clustering method. This should be one of "ward.D",
+"ward.D2","single","complete","average","mcquitty","median","centroid".
+default: "ward.D2"}
 
-\item{quiet}{decide if show the perturbation times. default: FALSE (show procedure)}
+\item{quiet}{decide if show the perturbation times. default:
+FALSE (show procedure)}
 }
 \value{
-A list of ClusterNumber: the optimal number of clusters (C); Clusters: K by C matrix of the optimal cluster results; AF: the area under the curve of CDF calculated from the perturbation results.
+A list of ClusterNumber: the optimal number of clusters (C);
+ Clusters: K by C matrix of the optimal cluster results;
+ AF: the area under the curve of CDF calculated from the perturbation results.
 }
 \description{
-Community detection method: Partition K phenotypes into disjoint network modules using the hierarchical clustering method based on the constructed signed bipartite network, GPN - Genotype and Phenotype Network. The number of network modules and the final cluster results are determined by the perturbation procedure.
+Community detection method: Partition K phenotypes into disjoint network
+modules using the hierarchical clustering method based on the constructed
+signed bipartite network, GPN - Genotype and Phenotype Network.
+The number of network modules and the final cluster results are determined
+by the perturbation procedure.
 }
 \examples{
 M <- 100
 K <- 10
 Sigma <- diag(1, nrow = K)
-BiNet <- mvrnorm(M, rep(0,K), Sigma)
-res <- CommunityDetection(BiNet, npert = 100, quiet = TRUE)
-
+Net <- MASS::mvrnorm(M, rep(0,K), Sigma)
+res <- CommunityDetection(Net, npert = 100, quiet = TRUE)
 
 }

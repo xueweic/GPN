@@ -2,29 +2,51 @@
 % Please edit documentation in R/SCORE.R
 \name{SCORE}
 \alias{SCORE}
+\alias{SPA_SCORE}
 \title{SCORE function}
 \usage{
 SCORE(x, y, cov = NULL)
+
+SPA_SCORE(x, y, cov = NULL, output.T = FALSE)
 }
 \arguments{
-\item{x}{The individual-level genotyes with dimension n individuals by M SNPs. It could be only one SNPs with a n by 1 genotype vector.}
+\item{x}{The individual-level genotyes with dimension n individuals by M SNPs.
+It could be only one SNPs with a n by 1 genotype vector.}
 
-\item{y}{The individual-level phentypes with dimesion n individuals by K phenotypes. It could be only one phenotype with a n by 1 phenotype vector.}
+\item{y}{The individual-level phentypes with dimesion n individuals by K
+phenotypes. It could be only one phenotype with a n by 1 phenotype vector.}
 
-\item{cov}{The covariate matrix with dimesion n individuals by C covariates. defalut: there is no covariates.}
+\item{cov}{The covariate matrix with dimesion n individuals by C covariates.
+defalut: there is no covariates.}
+
+\item{output.T}{Determine if output the test statistics. default:
+output.T = FALSE}
 }
 \value{
-A list of pvalue: K by M matrix of p-values; Tstat: K by M matrix of the test statistics.
+A list of pvalue: K by M matrix of p-values; Tstat: K by M matrix
+ of the test statistics.
 }
 \description{
-Score test for testing the association between phenotypes and SNPs. Note that the phenotypes could be the binary phenotypes with the balanced case-control ratios or quantitative phenotypes. If you consider the phenotypes with the unbalanced or extremely unbalanced cast-control ratios, you need to use SPA_SCORE function.
+Score test for testing the association between phenotypes and SNPs.
+Note that the phenotypes could be the binary phenotypes or
+quantitative phenotypes.
+}
+\details{
+\code{SCORE} Default method;
+
+\code{SPA_SCORE} Score test by saddlepoint approximation for testing the
+ association between only binary phenotypes and SNPs. Note that SPA_SCORE
+ function can use to binary phenotypes with the unbalanced or extremely
+ unbalanced cast-control ratios.
 }
 \examples{
 N <- 100
-M <- 5
+M <- 200
 K <- 10
 x <- replicate(M, rbinom(N,2,0.3))
-y <- replicate(K, rnorm(N))
-res <- SCORE(x,y)
+y1 <- replicate(2, sample(c(0,1), N, replace = TRUE, prob = c(0.9, 0.1)))
+y2 <- replicate(2, rnorm(N))
+res <- SCORE(x, y2)
+res1 <- SPA_SCORE(x, y1)
 
 }

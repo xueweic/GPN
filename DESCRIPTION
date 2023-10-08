@@ -2,12 +2,12 @@ Package: GPN
 Type: Package
 Title: A novel method for multiple phenotype association studies based on Genotype and Phenotype Network (GPN)
 Version: 0.1.0
-Author: Xuewei Cao, Shuanglin Zhang, Qiuying Sha
-Maintainer: Xuewei Cao <xueweic@mtu.edu>
+Author: Xuewei Cao, Lirong Zhu, Shuanglin Zhang, Qiuying Sha
+Maintainer: Xuewei Cao <xueweic@mtu.edu>, Lirong Zhu <lirongz@mtu.edu>
 Description: A novel method for multiple phenotype association studies by constructing a bipartite signed network, linking phenotypes and genotypes into a Genotype and Phenotype Network (GPN). The GPN can be constructed by both quantitative and qualitative traits, especially phenotypes have extremely unbalanced case-control ratios.
 License: GPL
 Encoding: UTF-8
-Depends: R (>= 3.0), SPAtest, class, Matrix, mvtnorm, MASS, dplyr, zoo
+Depends: R (>= 3.0), foreach, qvalue, stats, MASS, SPAtest, zoo, methods, dplyr
 BugReports: https://github.com/xueweic/GPN/issues
 LazyData: true
 RoxygenNote: 7.2.1
