@@ -48,14 +48,19 @@ Xuewei Cao #, Lirong Zhu #, Xiaoyu Liang, Shuanglin Zhang, Qiuying Sha*. Constru
 - **d.** The weighted degree distributions with different thresholds and the examples of two network topology annotations, approximate betweenness centrality and degree centrality, used in the heritability enrichment analysis; 
 - **e.** The one-mode projection of GPN onto phenotypes that are linked through shared genetic architecture. Heritability enrichment analysis and phenome-wide association studies are introduced as two important applications of the constructed GPN.
 
+ ##### Heritability Enrichment Analysis 
+- **Enrichment Analysis** Construct network topology annotations of genetic variants that quantify the possibility of pleiotropy, and apply stratified linkage disequilibrium (LD) score regression to highly correlated phenotypes to identify enriched annotations. The constructed network topology annotations are informative for disease heritability after conditioning on a broad set of functional annotations from the baseline-LD model.
+
+##### Phenome-wide Association Studies (PheWAS)
+- **Community Detection.** The powerful community detection method is used to partition phenotypes into disjoint network modules with different colors.
+- **FDR Controlling Precedure.**
+
 ##### Multiple Phenotype Assocaition Tests 
 - **Construction of PPN.** Construction of a signed network, named the Phenotype and Phenotype Network (PPN), which is the one-mode projection of GPN on phenotypes. 
 - **Community Detection.** The powerful community detection method is used to partition phenotypes into disjoint network modules with different colors. 
 - **Multiple Phenotype Assocaition Tests.** Multiple phenotype association tests are applied to test the association between phenotypes in each of the network modules and a SNP, then the Bonferroni correction is used to obtain the overall p-value.
 - **Colocalization analysis.** Colocalization of GWAS signals and eQTL analysis.
 
-##### Heritability Enrichment Analysis 
-- **Enrichment Analysis** Construct network topology annotations of genetic variants that quantify the possibility of pleiotropy, and apply stratified linkage disequilibrium (LD) score regression to highly correlated phenotypes to identify enriched annotations. The constructed network topology annotations are informative for disease heritability after conditioning on a broad set of functional annotations from the baseline-LD model.
 
 
 
