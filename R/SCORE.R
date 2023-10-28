@@ -77,7 +77,7 @@ SCORE <- function(x, y, cov = NULL) {
 
 
 #' @rdname SCORE
-#' @import SPAtest ScoreTest_SPA
+#' @importFrom SPAtest ScoreTest_SPA
 #' @export
 SPA_SCORE <- function(x, y, cov = NULL, output.T = FALSE) {
   requireNamespace("SPAtest", quietly = TRUE)
