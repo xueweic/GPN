@@ -40,9 +40,9 @@ adjust_p <- function(p, method = "qvalue", ...) {
   for (ind in 1:ncol(p)) {
     ind.K <- which(p[, ind] != 1)
     if (method %in% c("qvalue") || is.null(method)) {
-      re[ind.K, ind] <- qvalue(p[ind.K, ind], ...)$qvalues
+      re[ind.K, ind] <- tryCatch({ qvalue(p[ind.K, ind], ...)$qvalues }, error = function(e){p.adjust(p[ind.K, ind])})
     } else if (method == "lfdr") {
-      re[ind.K, ind] <- qvalue(p[ind.K, ind], ...)$lfdr
+      re[ind.K, ind] <- tryCatch({ qvalue(p[ind.K, ind], ...)$lfdr }, error = function(e){p.adjust(p[ind.K, ind])})
     } else if (method %in% p.adjust.methods) {
       #'BH'
       re <- p.adjust(p, method = method)
