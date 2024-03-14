@@ -25,7 +25,8 @@
 #' @param well.Net Logical object. If TRUE, return a well-defined GPN; If FALSE,
 #'  return a denser GPN. Default is TRUE.
 #'
-#' @return
+#' @return A list of object type containing: the generated
+#'  random bipartite GPN.
 #' @import stats
 #' @export
 #'

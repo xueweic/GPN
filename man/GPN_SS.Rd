@@ -31,6 +31,10 @@ Possible values are: \code{"kl_divergence_snp"},
 tuning values \code{tau}. It's should between 0 to 1, default value
 from 0.05 to 0.95 with a step size of 0.05.}
 }
+\value{
+A list of object type containing: the generated
+ random bipartite GPN.
+}
 \description{
 Construct a signed bipartite genotype and phenotype network
 based on GWAS summary statistics
