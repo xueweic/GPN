@@ -142,16 +142,22 @@ gpn_train <- function(Net, replicates = 50, weight = TRUE,
                              ...)$Sparsity.Net
 
   # calculate the index for original network and well-defined network
+  # finalModel <- list(metric = metric, tau = best.tau, Net = Net, pvalue = p,
+  #                    Net.well = Net.well, denser = list(connectance = connectance(Net),
+  #                                                       betweenness = betweenness(Net),
+  #                                                       cluster = cluster(Net),
+  #                                                       degree = degree(Net, weight)),
+  #                    well.defined = list(connectance = connectance(Net.well),
+  #                                        betweenness = betweenness(Net.well),
+  #                                        cluster = cluster(Net.well),
+  #                                        degree = degree(Net.well, weight)))
   finalModel <- list(metric = metric, tau = best.tau, Net = Net, pvalue = p,
                      Net.well = Net.well, denser = list(connectance = connectance(Net),
                                                         betweenness = betweenness(Net),
-                                                        cluster = cluster(Net),
                                                         degree = degree(Net, weight)),
                      well.defined = list(connectance = connectance(Net.well),
                                          betweenness = betweenness(Net.well),
-                                         cluster = cluster(Net.well),
                                          degree = degree(Net.well, weight)))
-
 
   endTime <- proc.time()
   times <- endTime - startTime
@@ -159,7 +165,6 @@ gpn_train <- function(Net, replicates = 50, weight = TRUE,
                         Net.well = Net.well,
                         Net.topology = list(connectance = connectance(Net.well),
                                             betweenness = betweenness(Net.well),
-                                            cluster = cluster(Net.well),
                                             degree = degree(Net.well, weight)),
                         times = times))
   out
