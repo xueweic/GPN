@@ -106,12 +106,12 @@ gpn_train <- function(Net, replicates = 50, weight = TRUE,
     Net.tau <- adjust_adjacency(Net, p, tau = tuneGrid[i], method = "qvalue", ...)$Sparsity.Net
     foreach(rep = 1:replicates, .combine = "c", .verbose = FALSE, .errorhandling = "stop") %do%
       {
-        Net.r <- GPN_random(Net)[[1]]
-        tmp.DE <- as.data.frame(degree_entropy(Net, weight, ...))
+        Net.r <- GPN_random(Net.tau)[[1]]
+        tmp.DE <- as.data.frame(degree_entropy(Net.tau, weight, ...))
         res.DE <- rbind(res.DE, tmp.DE)
-        tmp.CE <- as.data.frame(cross_entropy(Net, Net.r, weight, ...))
+        tmp.CE <- as.data.frame(cross_entropy(Net.tau, Net.r, weight, ...))
         res.CE <- rbind(res.CE, tmp.CE)
-        tmp.KL <- as.data.frame(kl_divergence(Net, Net.r, weight, ...))
+        tmp.KL <- as.data.frame(kl_divergence(Net.tau, Net.r, weight, ...))
         res.KL <- rbind(res.KL, tmp.KL)
       }
     list(degree_entropy = res.DE, cross_entropy = res.CE, kl_divergence = res.KL)
