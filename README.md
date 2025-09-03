@@ -31,8 +31,7 @@ library(GPN)
 If meet issue about dependencies, please try:
 
 ```r
-devtools::install_github("xueweic/GPN", dependencies = TRUE, 
-                        build_vignettes = FALSE, force = TRUE)
+devtools::install_github("xueweic/GPN", dependencies = TRUE, build_vignettes = FALSE, force = TRUE)
 ```
 
 ## Reference
