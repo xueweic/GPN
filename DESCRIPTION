@@ -3,12 +3,7 @@ Type: Package
 Title: Genotype and Phenotype Network for Multiple Phenotype Association Studies
 Version: 0.1.0
 Date: 2025-09-03
-Authors@R: c(
-    person("Xuewei", "Cao", email = "xueweic@mtu.edu", role = c("aut", "cre")),
-    person("Lirong", "Zhu", email = "lirongz@mtu.edu", role = c("aut")),
-    person("Shuanglin", "Zhang", role = c("aut")),
-    person("Qiuying", "Sha", role = c("aut"))
-)
+Author: Xuewei Cao, Lirong Zhu, Shuanglin Zhang, Qiuying Sha
 Maintainer: Xuewei Cao <xueweic@mtu.edu>
 Description: A novel statistical method for multiple phenotype association studies 
     that constructs a bipartite signed network linking phenotypes and genotypes 
