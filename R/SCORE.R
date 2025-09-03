@@ -120,7 +120,7 @@ SPA_SCORE <- function(x, y, cov = NULL, output.T = FALSE) {
       pv[i.phen, ] <- res$p.value
       Tstat[i.phen, ] <- res$beta/res$SEbeta
     }
-    return(list(pvalue = pv, Tstat = Tstat))
+    return(list(pvalue = pv, Tstat = Tstat, Betahat = res$beta, seBetahat = res$SEbeta))
   }
 }
 
