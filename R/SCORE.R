@@ -119,6 +119,8 @@ SPA_SCORE <- function(x, y, cov = NULL, output.T = FALSE) {
                            cov = cov, method = "fastSPA", beta.out = TRUE, beta.Cutoff = 1)
       pv[i.phen, ] <- res$p.value
       Tstat[i.phen, ] <- res$beta/res$SEbeta
+      Betahat[i.phen, ] <- res$beta
+      seBetahat[i.phen, ] <- res$SEbeta
     }
     return(list(pvalue = pv, Tstat = Tstat, Betahat = Betahat, seBetahat = seBetahat))
   }
