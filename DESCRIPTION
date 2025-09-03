@@ -1,13 +1,48 @@
 Package: GPN
 Type: Package
-Title: A novel method for multiple phenotype association studies based on Genotype and Phenotype Network (GPN)
+Title: Genotype and Phenotype Network for Multiple Phenotype Association Studies
 Version: 0.1.0
-Author: Xuewei Cao, Lirong Zhu, Shuanglin Zhang, Qiuying Sha
-Maintainer: Xuewei Cao <xueweic@mtu.edu>, Lirong Zhu <lirongz@mtu.edu>
-Description: A novel method for multiple phenotype association studies by constructing a bipartite signed network, linking phenotypes and genotypes into a Genotype and Phenotype Network (GPN). The GPN can be constructed by both quantitative and qualitative traits, especially phenotypes have extremely unbalanced case-control ratios.
-License: GPL
+Date: 2025-09-03
+Authors@R: c(
+    person("Xuewei", "Cao", email = "xueweic@mtu.edu", role = c("aut", "cre")),
+    person("Lirong", "Zhu", email = "lirongz@mtu.edu", role = c("aut")),
+    person("Shuanglin", "Zhang", role = c("aut")),
+    person("Qiuying", "Sha", role = c("aut"))
+)
+Maintainer: Xuewei Cao <xueweic@mtu.edu>
+Description: A novel statistical method for multiple phenotype association studies 
+    that constructs a bipartite signed network linking phenotypes and genotypes 
+    into a unified Genotype and Phenotype Network (GPN). The method effectively 
+    handles both quantitative and qualitative traits, with particular strength 
+    in analyzing phenotypes with extremely unbalanced case-control ratios. 
+    The GPN framework provides enhanced statistical power for detecting 
+    associations across multiple correlated phenotypes while controlling 
+    for population structure and relatedness.
+License: GPL (>= 2)
 Encoding: UTF-8
-Depends: R (>= 3.0), foreach, qvalue, stats, MASS, SPAtest, zoo, methods, dplyr, ACAT,harmonicmeanp
-BugReports: https://github.com/xueweic/GPN/issues
 LazyData: true
+Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.2
+Depends: 
+    R (>= 3.5.0)
+Imports:
+    foreach,
+    stats,
+    MASS,
+    SPAtest,
+    zoo,
+    methods,
+    dplyr,
+    harmonicmeanp
+Suggests:
+    qvalue,
+    ACAT,
+    testthat (>= 3.0.0),
+    knitr,
+    rmarkdown
+Remotes:
+    bioc::qvalue,
+    yaowuliu/ACAT
+BugReports: https://github.com/xueweic/GPN/issues
+Config/testthat/edition: 3
+VignetteBuilder: knitr
