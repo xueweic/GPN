@@ -113,14 +113,14 @@ SPA_SCORE <- function(x, y, cov = NULL, output.T = FALSE) {
     }
     return(list(pvalue = pv))
   } else if (output.T) {
-    Tstat <- matrix(1, ncol = ncol(x), nrow = ncol(y))
+    Tstat <- Betahat <- seBetahat <- matrix(1, ncol = ncol(x), nrow = ncol(y))
     for (i.phen in 1:K) {
       res <- ScoreTest_SPA(genos = t(x), pheno = as.numeric(y[, i.phen]),
                            cov = cov, method = "fastSPA", beta.out = TRUE, beta.Cutoff = 1)
       pv[i.phen, ] <- res$p.value
       Tstat[i.phen, ] <- res$beta/res$SEbeta
     }
-    return(list(pvalue = pv, Tstat = Tstat, Betahat = res$beta, seBetahat = res$SEbeta))
+    return(list(pvalue = pv, Tstat = Tstat, Betahat = Betahat, seBetahat = seBetahat))
   }
 }
 
