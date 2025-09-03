@@ -28,6 +28,13 @@ devtools::install_github("xueweic/GPN")
 library(GPN)
 ```
 
+If meet issue about dependencies, please try:
+
+```r
+devtools::install_github("xueweic/GPN", dependencies = TRUE, 
+                        build_vignettes = FALSE, force = TRUE)
+```
+
 ## Reference
 Xuewei Cao, Shuanglin Zhang, Qiuying Sha*. A novel method for multiple phenotype association studies based on genotype and phenotype network.
 
