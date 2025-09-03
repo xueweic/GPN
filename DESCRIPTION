@@ -46,3 +46,4 @@ Remotes:
 BugReports: https://github.com/xueweic/GPN/issues
 Config/testthat/edition: 3
 VignetteBuilder: knitr
+
